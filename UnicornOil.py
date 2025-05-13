@@ -1,4 +1,5 @@
 import pygame
+from ball import Ball
 
 pygame.init()
 
@@ -35,6 +36,12 @@ unic_right = pygame.transform.flip(unic_surf, True, False)
 unic = unic_left
 speed_unic = 4  # скорость перемещения единорога
 
+speed_ball = 1  # скорость перемещения клубники
+# создание первой клубники
+b1 = Ball(W//2, 'ponch.png')
+b2 = Ball(W//3, 'ponch.png')
+b3 = Ball(W//1.2, 'ponch.png')
+
 # сориентируем квадрат(поверхность) единорога по центру внизу
 unic_rect = unic_surf.get_rect(center=(300, 350))
 
@@ -66,11 +73,32 @@ while True:
     # перерисовываем после всех движений
     # очищаем чтобы не было следов
     # заполняя поле белым на каждой итерации цикла
-    sc.fill(YELLOW)  # цвет заливки
+    sc.fill(WHITE)  # цвет заливки
     sc.blit(bg_surf, (0, 0))  # радуга на заднем фоне
     sc.blit(finish_surf, (15, 0))  # финишное облачко
     sc.blit(unic, unic_rect)  # сам единорог и квадрат единорога
 
+    sc.blit(b1.image, b1.rect)  # отображаем клубнику и ее область
+    sc.blit(b2.image, b2.rect)  # отображаем клубнику и ее область
+    sc.blit(b3.image, b3.rect)  # отображаем клубнику и ее область
+
     pygame.display.update()
 
     clock.tick(FPS)
+
+    # движение пончика
+    # как только достигает низа кона, снова появляется сверху
+    if b1.rect.y < H - 20:
+        b1.rect.y += speed_ball
+    else:
+        b1.rect.y = 0
+
+    if b2.rect.y < H - 20:
+        b2.rect.y += speed_ball
+    else:
+        b2.rect.y = 0
+
+    if b3.rect.y < H - 20:
+        b3.rect.y += speed_ball
+    else:
+        b3.rect.y = 0
