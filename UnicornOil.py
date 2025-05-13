@@ -79,9 +79,9 @@ while True:
     sc.blit(finish_surf, (15, 0))  # финишное облачко
     sc.blit(unic, unic_rect)  # сам единорог и квадрат единорога
 
-    sc.blit(b1.image, b1.rect)  # отображаем клубнику и ее область
-    sc.blit(b2.image, b2.rect)  # отображаем клубнику и ее область
-    sc.blit(b3.image, b3.rect)  # отображаем клубнику и ее область
+    sc.blit(b1.image, b1.rect)  # отображаем пончик и его область
+    sc.blit(b2.image, b2.rect)  # отображаем пончик и его область
+    sc.blit(b3.image, b3.rect)  # отображаем пончик и его область
 
     pygame.display.update()
 
