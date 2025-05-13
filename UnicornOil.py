@@ -1,5 +1,6 @@
 import pygame
 from ball import Ball
+from random import randint
 
 pygame.init()
 
@@ -36,11 +37,11 @@ unic_right = pygame.transform.flip(unic_surf, True, False)
 unic = unic_left
 speed_unic = 4  # скорость перемещения единорога
 
-speed_ball = 1  # скорость перемещения клубники
+speed_ball = 5  # скорость перемещения клубники
 # создание первой клубники
-b1 = Ball(W//2, 'ponch.png')
-b2 = Ball(W//3, 'ponch.png')
-b3 = Ball(W//1.2, 'ponch.png')
+b1 = Ball(randint(0, W), randint(1, speed_ball), 'ponch.png')
+b2 = Ball(randint(0, W), randint(1, speed_ball), 'ponch.png')
+b3 = Ball(randint(0, W), randint(1, speed_ball), 'ponch.png')
 
 # сориентируем квадрат(поверхность) единорога по центру внизу
 unic_rect = unic_surf.get_rect(center=(300, 350))
@@ -86,19 +87,7 @@ while True:
 
     clock.tick(FPS)
 
-    # движение пончика
-    # как только достигает низа кона, снова появляется сверху
-    if b1.rect.y < H - 20:
-        b1.rect.y += speed_ball
-    else:
-        b1.rect.y = 0
-
-    if b2.rect.y < H - 20:
-        b2.rect.y += speed_ball
-    else:
-        b2.rect.y = 0
-
-    if b3.rect.y < H - 20:
-        b3.rect.y += speed_ball
-    else:
-        b3.rect.y = 0
+    # движение пончиков
+    b1.update(H)
+    b2.update(H)
+    b3.update(H)
