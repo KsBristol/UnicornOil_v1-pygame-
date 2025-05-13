@@ -33,7 +33,7 @@ unic_left = unic_surf
 unic_right = pygame.transform.flip(unic_surf, True, False)
 
 unic = unic_left
-speed = 4  # скорость перемещения единорога
+speed_unic = 4  # скорость перемещения единорога
 
 # сориентируем квадрат(поверхность) единорога по центру внизу
 unic_rect = unic_surf.get_rect(center=(300, 350))
@@ -49,7 +49,7 @@ while True:
     if bt[pygame.K_LEFT]:  # нажатие на кнопку налево
         unic = unic_left
         # убавляем скорость от координаты x
-        unic_rect.x -= speed
+        unic_rect.x -= speed_unic
         # если координата становится < 0 мы приравниваем её 0,
         # чтобы единорог не выходил за пределы экрана
         if unic_rect.x < 0:
@@ -57,7 +57,7 @@ while True:
     elif bt[pygame.K_RIGHT]:  # нажатие на кнопку направо
         unic = unic_right
         # прибавляем скорость к координате x
-        unic_rect.x += speed
+        unic_rect.x += speed_unic
         # если мы достигаем правого края, то координата x приравнивается
         # правому краю, чтобы единорог не выходил за пределы экрана
         if unic_rect.x > W - unic_rect.height:
@@ -66,7 +66,7 @@ while True:
     # перерисовываем после всех движений
     # очищаем чтобы не было следов
     # заполняя поле белым на каждой итерации цикла
-    sc.fill(WHITE)  # цвет заливки
+    sc.fill(YELLOW)  # цвет заливки
     sc.blit(bg_surf, (0, 0))  # радуга на заднем фоне
     sc.blit(finish_surf, (15, 0))  # финишное облачко
     sc.blit(unic, unic_rect)  # сам единорог и квадрат единорога
