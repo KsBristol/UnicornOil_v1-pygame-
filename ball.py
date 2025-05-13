@@ -3,7 +3,7 @@ import pygame
 
 class Ball(pygame.sprite.Sprite):
     """ Для обработки групп спрайтов"""
-    def __init__(self, x, filename):
+    def __init__(self, x, speed, filename):
         pygame.sprite.Sprite.__init__(self)
         # изображение спрайта(ссылка на Surface)
         # его загружаем из файла
@@ -12,4 +12,13 @@ class Ball(pygame.sprite.Sprite):
         # располагаем для падения посередине координаты x,
         # а по y будет равно 0
         self.rect = self.image.get_rect(center=(x, 0))
+
+        self.speed = speed
+
+    def update(self, *args):
+        """движение пончика как только достигает низа окна, снова появляется сверху"""
+        if self.rect.y < args[0] - 20:
+            self.rect.y += self.speed
+        else:
+            self.rect.y = 0
 
