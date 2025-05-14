@@ -36,12 +36,14 @@ unic_right = pygame.transform.flip(unic_surf, True, False)
 
 unic = unic_left
 speed_unic = 4  # скорость перемещения единорога
+speed_ball = 5  # скорость перемещения капель и пончиков
 
-speed_ball = 5  # скорость перемещения клубники
-# создание первой клубники
-b1 = Ball(randint(0, 200), randint(1, speed_ball), 'ponch.png')
-b2 = Ball(randint(200, 400), randint(1, speed_ball), 'ponch.png')
-b3 = Ball(randint(400, 600), randint(1, speed_ball), 'ponch.png')
+# создание пончиков через единую группу
+balls = pygame.sprite.Group()
+balls.add(Ball(randint(0, 200), randint(1, speed_ball), 'ponch.png'),
+          Ball(randint(200, 400), randint(1, speed_ball), 'drop.png'),
+          Ball(randint(400, 600), randint(1, speed_ball), 'ponch.png'))
+
 
 # сориентируем квадрат(поверхность) единорога по центру внизу
 unic_rect = unic_surf.get_rect(center=(300, 350))
@@ -79,15 +81,11 @@ while True:
     sc.blit(finish_surf, (15, 0))  # финишное облачко
     sc.blit(unic, unic_rect)  # сам единорог и квадрат единорога
 
-    sc.blit(b1.image, b1.rect)  # отображаем пончик и его область
-    sc.blit(b2.image, b2.rect)  # отображаем пончик и его область
-    sc.blit(b3.image, b3.rect)  # отображаем пончик и его область
+    balls.draw(sc)  # отображение всей группы объектов balls
 
     pygame.display.update()
 
     clock.tick(FPS)
 
-    # движение пончиков
-    b1.update(H)
-    b2.update(H)
-    b3.update(H)
+    # движение пончиков и капель
+    balls.update(H)
