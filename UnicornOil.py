@@ -3,6 +3,8 @@ from ball import Ball
 from random import randint
 
 pygame.init()
+# функция каждые 2000мс будет генерировать событие USEREVENT
+pygame.time.set_timer(pygame.USEREVENT, 2000)
 
 # устанавливаем размер игрового поля
 W, H = 600, 400
@@ -36,13 +38,24 @@ unic_right = pygame.transform.flip(unic_surf, True, False)
 
 unic = unic_left
 speed_unic = 4  # скорость перемещения единорога
-speed_ball = 5  # скорость перемещения капель и пончиков
 
-# создание пончиков через единую группу
+# создание объектов пончиков и капель через единую группу
 balls = pygame.sprite.Group()
-balls.add(Ball(randint(0, 200), randint(1, speed_ball), 'ponch.png'),
-          Ball(randint(200, 400), randint(1, speed_ball), 'drop.png'),
-          Ball(randint(400, 600), randint(1, speed_ball), 'ponch.png'))
+# один раз загрузим картинки
+balls_images = ['drop.png', 'ponch.png']
+# формирование списка из поверхностей загруженного изображения
+balls_surf = [pygame.image.load(path).convert_alpha() for path in balls_images]
+
+
+def createBall(group):
+    """Функция для создания нового объекта пончика или капли,
+    со случайным выбором изображения и со случайной
+    координатой по х"""
+    indx = randint(0, len(balls_surf) - 1)
+    x = randint(20, W - 20)
+    speed = randint(1, 4)
+
+    return Ball(x, speed, balls_surf[indx], group)
 
 
 # сориентируем квадрат(поверхность) единорога по центру внизу
@@ -53,6 +66,8 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit()
+        elif event.type == pygame.USEREVENT:
+            createBall(balls)
 
     # get_pressed() - возвращает номера нажатых клавиш
     bt = pygame.key.get_pressed()
@@ -87,5 +102,4 @@ while True:
 
     clock.tick(FPS)
 
-    # движение пончиков и капель
-    balls.update(H)
+    balls.update(H)  # движение пончиков и капель
