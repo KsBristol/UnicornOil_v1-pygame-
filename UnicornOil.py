@@ -39,9 +39,9 @@ speed_unic = 4  # скорость перемещения единорога
 
 speed_ball = 5  # скорость перемещения клубники
 # создание первой клубники
-b1 = Ball(randint(0, W), randint(1, speed_ball), 'ponch.png')
-b2 = Ball(randint(0, W), randint(1, speed_ball), 'ponch.png')
-b3 = Ball(randint(0, W), randint(1, speed_ball), 'ponch.png')
+b1 = Ball(randint(0, 200), randint(1, speed_ball), 'ponch.png')
+b2 = Ball(randint(200, 400), randint(1, speed_ball), 'ponch.png')
+b3 = Ball(randint(400, 600), randint(1, speed_ball), 'ponch.png')
 
 # сориентируем квадрат(поверхность) единорога по центру внизу
 unic_rect = unic_surf.get_rect(center=(300, 350))
