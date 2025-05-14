@@ -16,9 +16,10 @@ class Ball(pygame.sprite.Sprite):
         self.speed = speed
 
     def update(self, *args):
-        """движение пончика как только достигает низа окна, снова появляется сверху"""
+        """Движение пончика как только достигает низа окна,
+        снова появляется сверху
+        в args передаем высоту рабочей зоны"""
         if self.rect.y < args[0] - 20:
             self.rect.y += self.speed
         else:
             self.rect.y = 0
-
