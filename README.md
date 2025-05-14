@@ -1,1 +1,3 @@
 # UnicornOil_v1_pygame
+
+pygame 2.1.3 (SDL 2.0.22, Python 3.10.4)
